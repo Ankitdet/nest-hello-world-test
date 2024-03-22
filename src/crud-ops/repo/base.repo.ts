@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 import { BaseEntity } from '../entities/base.entity';
 import { IRepository } from '../interface/crud.interface';
 
@@ -13,7 +13,7 @@ export abstract class BaseRepository<T extends BaseEntity> implements IRepositor
         return await this.repository.findOne(id);
     }
 
-    async create(data: any): Promise<unknown> {
+    async create(data: DeepPartial<T>): Promise<unknown> {
         const entity = this.repository.create(data);
         return await this.repository.save(entity);
     }
