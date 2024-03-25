@@ -1,13 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CrudService } from '../../crud-ops/crud-service';
 import { User } from '../entity/user.entity';
+import { UserRepository } from '../repo/user.repo';
 
 @Injectable()
-export class UserService extends CrudService<User> {
-    constructor(
-        @InjectRepository(User) repository: Repository<User>) {
-        super(repository);
+export class UserService {
+    constructor(private userRepository: UserRepository) {
+    }
+
+    public async findAll(): Promise<User[]> {
+        console.log("Modified findAll method is called");
+        return this.userRepository.findAll();
+    }
+
+    public async findById(id: any): Promise<User> {
+        console.log("Modified findAll method is called");
+        return await this.userRepository.findById(id)
+    }
+
+    public async create(data: any): Promise<User[]> {
+        console.log("Modified findAll method is called");
+        return this.userRepository.create(data);
     }
 }

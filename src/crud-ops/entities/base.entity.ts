@@ -5,12 +5,14 @@ import {
 } from 'typeorm';
 
 export abstract class BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt: string;
 
     @UpdateDateColumn()
-    updatedAt: Date;
+    updatedAt: string;
+
 }
+

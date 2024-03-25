@@ -5,11 +5,31 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2017",
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "lib": [
+      "es2022"
+    ],
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": false,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "noLib": false,
+    "moduleResolution": "node",
+    "noImplicitReturns": false,
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
+    ]
   },
   "exclude": [
     "node_modules",

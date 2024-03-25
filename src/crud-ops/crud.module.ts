@@ -1,11 +1,11 @@
 import { Global, Module } from '@nestjs/common';
-import { CrudService } from './crud-service';
+import { BaseCrudService } from './crud-service';
 
 
 @Global()
 @Module({
     imports: [],
-    providers: [CrudService as any],
-    exports: [CrudService],
+    providers: [BaseCrudService as any],
+    exports: [BaseCrudService],
 })
 export class CrudModule { }

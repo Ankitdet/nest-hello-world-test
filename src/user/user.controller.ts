@@ -1,48 +1,44 @@
 import {
+    Body,
     Controller,
     Get,
-    Post,
-    Put,
-    Delete,
     Param,
-    Body,
     ParseIntPipe,
-    ValidationPipe,
-    UsePipes,
+    Post
 } from '@nestjs/common';
-import { UserRepository } from './repo/user.repo';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entity/user.entity';
+import { UserService } from './service/user.service';
 
 @Controller('users')
 export class UserController {
-    constructor(private readonly userRepository: UserRepository) { }
+    constructor(private readonly userService: UserService) { }
 
     @Post('/')
     async create(@Body() data: CreateUserDto): Promise<unknown> {
-        return await this.userRepository.create(data);
+        return await this.userService.create(data);
     }
 
     @Get('/')
     async findAll(): Promise<User[]> {
-        return this.userRepository.findAll();
+        return this.userService.findAll();
     }
 
     @Get(':id')
     async findById(@Param('id', ParseIntPipe) id: number): Promise<User> {
-        return this.userRepository.findById(Number(String(id)));
+        return this.userService.findById(Number(String(id)));
     }
 
-    @Put(':id')
+    /* @Put(':id')
     async update(
-        @Param('id') id: number,
+        @Param('id') id: string,
         @Body() data: Partial<User>,
-    ): Promise<User> {
-        return this.userRepository.update(id, data);
+    ): Promise<void> {
+        return this.userService.update(id, data);
     }
 
     @Delete(':id')
-    async delete(@Param('id') id: number): Promise<void> {
-        return this.userRepository.delete(id);
-    }
+    async delete(@Param('id') id: string): Promise<void> {
+        return this.userService.delete(id);
+    } */
 }

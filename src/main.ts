@@ -7,3 +7,4 @@ async function bootstrap() {
   await app.listen(3000);
 }
 bootstrap();
+// https://nest-hello-world-test-9tw5ezqjy-apdetrojas-projects.vercel.app/users
