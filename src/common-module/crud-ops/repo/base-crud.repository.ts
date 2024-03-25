@@ -1,9 +1,9 @@
-import { DeepPartial, FindManyOptions, FindOneOptions, FindOptionsWhere, ObjectId, Repository } from "typeorm";
-import { BaseEntity } from "./entities/base.entity";
-import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
-import { IRepository } from "./interface/crud.interface";
+import { DeepPartial, FindManyOptions, FindOneOptions, FindOptionsWhere, ObjectId, Repository } from 'typeorm';
+import { BaseEntity } from '../entities/base.entity';
+import { IRepository } from '../interface/base-crud.interface';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
-export abstract class BaseCrudService<T extends BaseEntity> implements IRepository<T> {
+export abstract class BaseRepository<T extends BaseEntity> implements IRepository<T>{
     constructor(public readonly repository: Repository<T>) { }
 
     public async findAll(options?: FindManyOptions<T>): Promise<T[]> {
