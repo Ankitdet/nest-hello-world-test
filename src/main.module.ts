@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DBConfig } from './common-infra/config/db-config';
 import { AllEntities } from './export-entity';
 import { AllModules } from './export-module';
 
+@Global()
 @Module({
   imports: [
     ...AllModules,
@@ -16,7 +17,7 @@ import { AllModules } from './export-module';
       password: DBConfig.POSTGRES_PASSWORD,
       database: DBConfig.POSTGRES_DATABASE,
       synchronize: true,
-      logging: true,
+      logging: false,
       subscribers: [],
       migrations: [],
       entities: AllEntities
@@ -24,5 +25,6 @@ import { AllModules } from './export-module';
   ],
   controllers: [],
   providers: [],
+  exports: [/* core module*/]
 })
 export class MainModule { }
