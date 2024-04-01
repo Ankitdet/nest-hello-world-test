@@ -9,8 +9,4 @@ export class UserRepository extends BaseRepository<User> {
     constructor(@InjectRepository(User) userRepository: Repository<User>) {
         super(userRepository);
     }
-
-    public findAllData() {
-        this.findAll()
-    }
 }

@@ -11,16 +11,15 @@ export class ResponseHandlerInterceptor implements NestInterceptor {
         const req = context.switchToHttp().getRequest()
 
         const reqId = uuidv4()
-        const { body, query, method, originalUrl, headers } = req
+        const { body, query, method, originalUrl } = req
         const reqObj = {
             method,
-            headers,
             originalUrl,
             body,
             query,
             reqId,
         }
-        console.log(`${JSON.stringify(reqObj, null, 2)}`)
+        console.log(`Incoming Request: ${JSON.stringify(reqObj, null, 2)}`)
         return next.handle().pipe(map(data => handleResponse(context, data, reqId)))
     }
 }

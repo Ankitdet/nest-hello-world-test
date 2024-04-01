@@ -11,11 +11,11 @@ const isStringified = (str: any) => {
 export class GenericError {
     public message: string
     public statusCode: HttpStatus
-    public errorCode: string
+    public detail: string
 
-    constructor(errorCode: string, message: string, statusCode: HttpStatus = HttpStatus.INTERNAL_SERVER_ERROR) {
-        this.errorCode = errorCode
+    constructor(message: string, detail: any, statusCode: HttpStatus = HttpStatus.INTERNAL_SERVER_ERROR) {
         this.message = isStringified(message)
+        this.detail = JSON.stringify(detail, null, 2)
         this.statusCode = statusCode
     }
 }

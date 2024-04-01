@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Result } from '../../../core-common/result-model';
 import { User } from '../entity/user.entity';
 import { UserRepository } from '../repo/user.repo';
 
@@ -7,18 +8,11 @@ export class UserService {
     constructor(private userRepository: UserRepository) {
     }
 
-    public async findAll(): Promise<User[]> {
-        console.log("Modified findAll method is called");
+    public async findAll(): Promise<Result<User[]>> {
         return this.userRepository.findAll();
     }
 
-    public async findById(id: any): Promise<User> {
-        console.log("Modified findAll method is called");
-        return await this.userRepository.findById(id)
-    }
-
-    public async create(data: any): Promise<User[]> {
-        console.log("Modified findAll method is called");
-        return this.userRepository.create(data);
+    public async save(data: any): Promise<Result<User[]>> {
+        return await this.userRepository.save(data);
     }
 }

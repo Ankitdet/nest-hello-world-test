@@ -12,12 +12,22 @@ plugins:
 functions:
   app:
     handler: src/lambda.handler
+    runtime: nodejs16.x
+    timeout: 5
     events:
       - http:
-          path: /
+          path: '/{proxy+}'
           method: any
+          cors: true
 
 custom:
   webpack:
     webpackConfig: './webpack.config.js'
     packager: 'npm'
+    includeModules:
+      forceExclude:
+        - aws-sdk
+    packagerOptions:
+      scripts:
+        - rm -rf node_modules/aws-sdk/**
+        - rm -rf node_modules/@types/**
