@@ -1,0 +1,39 @@
+service: service-serverless
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  versionFunctions: true
+  deploymentBucket: 
+    name: sls-bundled-code
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-dotenv-plugin
+  - serverless-deployment-bucket
+
+functions:
+  sample-proxy:
+    handler: src/lambda.handler
+    runtime: nodejs16.x
+    timeout: 10
+    events:
+      - http:
+          path: '/{proxy+}'
+          method: any
+          cors: true
+custom:
+  dotenv:
+    path: ./env/.env.dev
+    logging: true
+  webpack:
+    webpackConfig: './webpack.config.js'
+    packager: 'npm'
+    includeModules:
+      forceExclude:
+        - aws-sdk
+    packagerOptions:
+      scripts:
+        - rm -rf node_modules/aws-sdk/**
+        - rm -rf node_modules/typescript/**
+        - rm -rf node_modules/@types/**
